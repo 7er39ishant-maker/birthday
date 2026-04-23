@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise 🎁</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* First Page */
+    #page1 {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    #page1 h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    #page1 button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: white;
+      color: #764ba2;
+      cursor: pointer;
+    }
+
+    /* Second Page */
+    #page2 {
+      display: none;
+      min-height: 100vh;
+      background: linear-gradient(270deg, #ff4d6d, #ff9a9e, #fad0c4);
+      background-size: 600% 600%;
+      animation: gradientMove 10s ease infinite;
+      padding: 20px;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h2 {
+      font-size: 35px;
+      margin-top: 30px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {text-shadow: 0 0 10px #fff;}
+      to {text-shadow: 0 0 25px #ffd700;}
+    }
+
+    #message {
+      font-size: 22px;
+      margin-top: 15px;
+    }
+
+    .paragraph {
+      margin: 25px auto;
+      max-width: 90%;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .cake {
+      font-size: 60px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    button.main {
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background: white;
+      color: #ff4d6d;
+      cursor: pointer;
+    }
+
+    .from {
+      margin-top: 30px;
+      font-size: 18px;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mp3">
+</audio>
+
+<!-- Page 1 -->
+<div id="page1">
+  <h1>🎁 I have a Surprise for you</h1>
+  <button onclick="openGift()">Open 🎉</button>
+</div>
+
+<!-- Page 2 -->
+<div id="page2">
+  <h2>🎉 Happy Birthday Papa 🎉</h2>
+
+  <div id="message"></div>
+
+  <div class="paragraph">
+    Thank you for everything my dear father.  
+    You have always supported me, guided me, and stood by me in every situation.  
+    Your strength and love inspire me every single day.
+  </div>
+
+  <div class="cake" onclick="cutCake()">🎂</div>
+
+  <button class="main" onclick="startParty()">Tap for Celebration 🎁</button>
+
+  <div class="from">– From Ishan</div>
+</div>
+
+<script>
+  function openGift() {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+
+    typeWriter();
+  }
+
+  const text = "Happiest Birthday my Super Hero ❤️";
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("message").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 60);
+    }
+  }
+
+  function startParty() {
+    document.getElementById("music").play();
+
+    setInterval(() => {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }, 1200);
+  }
+
+  function cutCake() {
+    alert("🎉 Cake Cut! Happy Birthday Papa ❤️");
+    confetti({
+      particleCount: 200,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+  }
+</script>
+
+</body>
+</html>
